@@ -9,14 +9,16 @@ import (
 
 var (
 	DBTypeDefault       = dblayer.DBTYPE("mongodb")
-	DBConnectionDefault = "mongodb://192.168.0.4"
+	DBConnectionDefault = "mongodb://localhost"
 	APIEndpointDefault  = "localhost:8081"
+	APITLSEndpointDefault  = "localhost:9091"
 )
 
 type ServiceConfig struct {
 	Databasetype dblayer.DBTYPE `json:"databasetype"`
 	DBConnection string         `json:"dbconnection"`
 	APIEndpoint  string         `json:"api_endpoint"`
+	APITLSEndpoint  string         `json:"api_tlsendpoint"`
 }
 
 func ExtractConfiguration(filename string) (ServiceConfig, error) {
@@ -24,6 +26,7 @@ func ExtractConfiguration(filename string) (ServiceConfig, error) {
 		DBTypeDefault,
 		DBConnectionDefault,
 		APIEndpointDefault,
+		APITLSEndpointDefault,
 	}
 	file, err := os.Open(filename)
 	if err != nil {
